@@ -1,0 +1,8 @@
+# ignore all hidden files
+.*
+
+creds.json
+tmp/
+# except don't ignore the hidden file .gitignore
+!/.gitignore
+
