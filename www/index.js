@@ -13,6 +13,47 @@ $(document).ready(function () {
 
 	CANVAS.attr('width', WIDTH);
 	CANVAS.attr('height', HEIGHT);
+        
+	// Firebase credentials
+	const firebaseConfig = {
+		apiKey: "AIzaSyBJNeT_Z1GExU6LOMob2GfEKgQLeZIfZa4",
+		authDomain: "bigcanvas-e50b1.firebaseapp.com",
+ 		projectId: "bigcanvas-e50b1",
+ 		storageBucket: "bigcanvas-e50b1.appspot.com",
+ 		messagingSenderId: "714000188961",
+ 		appId: "1:714000188961:web:79920d3d7c6483af644560"
+ 	};
+
+ 	// Initialize Firebase
+ 	const firebaseApp = firebase.initializeApp(firebaseConfig);
+ 	const db = firebaseApp.firestore();
+ 
+ 	db.collection('app').doc('grid').onSnapshot(function(doc) {
+		// Read in the data
+ 		let data = doc.data();
+ 		for (let key in data) {
+ 			let coords = key.split(",");
+ 			let json = data[key];
+ 			let pixelData = JSON.parse(json);
+ 			for (let subkey in pixelData) {
+ 				let subcoord = subkey.split(",");
+ 				let color = pixelData[subkey];
+ 				fillPixel(coords, subcoord, color);
+ 			}
+ 		}
+ 	});
+
+        function fillPixel(coords, subcoord, color) {
+                let coordX = parseInt(coords[0]);
+                let coordY = parseInt(coords[1]);
+                let subcoordX = parseInt(subcoord[0]);
+                let subcoordY = parseInt(subcoord[1]);
+
+                CTX.fillStyle = color;
+                let x = (coordX * DIMENSION + subcoordX) * PIXELSIZE;
+                let y = (coordY * DIMENSION + subcoordY) * PIXELSIZE;
+                CTX.fillRect(x, y, PIXELSIZE, PIXELSIZE);
+        }
 	
 	CTX.strokeStyle = 'rgba(0,0,0,0.25';
 	for (let i =0 ;i < DIMENSION * REPEATSX; ++i) {
@@ -32,6 +73,8 @@ $(document).ready(function () {
 	CANVAS.click(function(e) {
 		selectBox(e);
 	});
+
+	// Track mousemove for selecting pixel
 	CANVAS.mousemove(function(e){
 		let pixel = [Math.floor(e.offsetX / (PIXELSIZE * DIMENSION)), Math.floor(e.offsetY / (PIXELSIZE * DIMENSION))];
 		console.log(pixel);
@@ -45,7 +88,8 @@ $(document).ready(function () {
 			top: pixel[1] * PIXELSIZE * DIMENSION
 		});
 	});
-
+        
+	// Open drawing page of selected pixel
 	let SELECTED = 0;
 	function selectBox(e) {
 		if (SELECTED) return;
@@ -56,4 +100,3 @@ $(document).ready(function () {
 	}
 
 });
-
