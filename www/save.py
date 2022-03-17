@@ -10,13 +10,13 @@ import sys
 #})
 
 
-cred = credentials.Certificate("creds.json")
+cred = credentials.Certificate("../creds.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
 key = sys.argv[1] + ',' + sys.argv[2]
-filename = 'tmp/' + key
+filename = '../tmp/' + key
 
 with open(filename, 'r') as file:
     value = file.read()

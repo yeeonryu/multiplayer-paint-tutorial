@@ -20,8 +20,9 @@ if (isset($_REQUEST['submit'])) {
         $data = $_POST['data'];
         $data = json_encode($data);
 
-        $key = "$x,$y";
-        $filename = "tmp/$key";
+	$key = "$x,$y";
+	//write data file outside of the document root
+        $filename = "../tmp/$key";
         file_put_contents($filename, $data);
         $ret = null;
         $out = null;
@@ -44,7 +45,7 @@ print <<<EOF
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
 <script src="draw.js?version=$time"></script>
-<script src="pickr/dist/pickr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 <div id=picker></div>
 
 <div>
