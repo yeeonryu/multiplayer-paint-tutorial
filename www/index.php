@@ -12,6 +12,7 @@ print <<<EOF
 <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-auth-compat.js"></script>
 
 <style>
+@import url('http://fonts.cdnfonts.com/css/pixelsplitter');
 html, body {
     height: 100%;
 }
@@ -26,7 +27,7 @@ body {
     vertical-align: middle;
     background-color: #f0f0f0;
     margin: 16px;
-    font-family: Arial, Helevetica, sans-serif;
+    font-family: 'PixelSplitter', sans-serif;
 }
 #mycanvas {
 	border: 1px #000 solid;
@@ -46,6 +47,7 @@ body {
 
 h1 {
 	text-align: center;
+	font-size: 50px;
 }
 
 h2 {
