@@ -23,7 +23,8 @@ if (isset($_REQUEST['submit'])) {
 	$key = "$x,$y";
 	//write data file outside of the document root
         $filename = "../tmp/$key";
-        file_put_contents($filename, $data);
+	file_put_contents($filename, $data);
+	chmod($filename, 0777);
         $ret = null;
         $out = null;
         exec("python3 save.py 2>&1 '$x' '$y'", $out, $ret);
@@ -46,16 +47,21 @@ print <<<EOF
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
 <script src="draw.js?version=$time"></script>
 <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
-<div id=picker></div>
 
+<script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-auth-compat.js"></script>
+
+
+<div id=picker></div>
 <div>
 <canvas id=mycanvas width=500 height=500 style="margin:8px;border:1px #000 solid"></canvas>
 </div>
 
 <!-- Save the x,y coordinates -->
 <input type="submit" value = "Save" onclick="save($x, $y)">
-
 <style>
+@import url('https://fonts.cdnfonts.com/css/pixelsplitter');
 html, body {
     height: 100%;
 }
@@ -63,11 +69,18 @@ html, body {
 html {
     display: table;
     margin: auto;
+    
 }
 
 body {
     display: table-cell;
     vertical-align: middle;
+    //font-family: 'PixelSplitter', sans-serif;
+}
+
+input {
+    font-family: 'PixelSplitter', sans-serif;
+    padding: 5px;
 }
 
 

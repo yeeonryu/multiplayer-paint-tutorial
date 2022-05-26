@@ -12,7 +12,7 @@ print <<<EOF
 <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-auth-compat.js"></script>
 
 <style>
-@import url('http://fonts.cdnfonts.com/css/pixelsplitter');
+@import url('https://fonts.cdnfonts.com/css/pixelsplitter');
 html, body {
     height: 100%;
 }
