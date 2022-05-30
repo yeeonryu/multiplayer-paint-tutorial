@@ -24,7 +24,6 @@ if (isset($_REQUEST['submit'])) {
 	//write data file outside of the document root
         $filename = "../tmp/$key";
 	file_put_contents($filename, $data);
-	chmod($filename, 0777);
         $ret = null;
         $out = null;
         exec("python3 save.py 2>&1 '$x' '$y'", $out, $ret);
