@@ -1,6 +1,6 @@
 # Multiplayer-paint-tutorial
 
-LAMP Stack Tutorial building a simple realtime multiplayer paint application.
+LAMP Stack Tutorial building a simple real-time multiplayer paint application.
 
 The application is built following [TechLead tutorial](https://youtu.be/t1aXuJkmTg8).
 Javascript, Firebase, PHP, Python, and Nginx are used for the tutorial.
